@@ -58,6 +58,8 @@ jobs:
           #ITCH_GAME: a-little-square
           #ITCH_USER: kllngii
           #PACKAGE: build/WebGL
+      - name: Checkout code
+        uses: actions/checkout@v2
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
