@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 600805361}
   - component: {fileID: 600805360}
   - component: {fileID: 600805359}
+  - component: {fileID: 600805362}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -204,13 +205,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &600805362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 600805358}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc689f681cca44bed854ea3708357fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strength: 0.096
+  speed: 0.07
 --- !u!43 &757090120
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh23354
+  m_Name: pb_Mesh15954
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -695,7 +710,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17568
+  m_Name: pb_Mesh19646
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -858,7 +873,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh23380
+  m_Name: pb_Mesh19718
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1021,7 +1036,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh23326
+  m_Name: pb_Mesh19664
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2034,15 +2049,15 @@ MonoBehaviour:
   speed: 0.1
   jumpHeight: 2.7
   groundCheck: {fileID: 1623607728}
-  groundCheckRadius: 0.72
+  groundCheckRadius: 0.7
   whatIsGround:
     serializedVersion: 2
     m_Bits: 512
   doorCheck: {fileID: 1623607728}
-  doorCheckRadius: 0.5
+  doorCheckRadius: 1
   whatIsDoor:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 512
   level: 1
 --- !u!61 &1623607725
 BoxCollider2D:
@@ -2558,20 +2573,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!64 &2076853716
-MeshCollider:
+--- !u!61 &2076853716
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2076853715}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 10, y: 0.0001}
+  m_EdgeRadius: 0
 --- !u!23 &2076853717
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+//FIXME Nutzt die alte Touch-API, weil die neue noch kein Tutorial bzw. keine gute Dokumentation hat. Sollte sich dies ändern -> API wechseln
+using UnityEngine.UI;
 
 public class MovementAndCenter : MonoBehaviour {
   [Range(0, 20)][SerializeField]
@@ -18,16 +20,43 @@ public class MovementAndCenter : MonoBehaviour {
   public float doorCheckRadius = 0;
   public LayerMask whatIsDoor;
   public int level = 1;
+
   private bool grounded = false;
   private bool hithead = false;
   private bool hitside = false;
+
   private Vector2 v = new Vector2();
+
+  private Touch theTouch;
+  private Vector2 touchStartPosition, touchEndPosition;
+  private string direction = "";
+
   public void OnMove(InputValue value) {
     v = value.Get<Vector2>();
     if(v.y > 0 && grounded)
       v.y = jumpHeight;
   }
   void Update() {
+    if (Input.touchCount > 0) {
+	     theTouch = Input.GetTouch(0);
+       if (theTouch.phase == UnityEngine.TouchPhase.Began) {
+         touchStartPosition = theTouch.position;
+	     }
+       else if (theTouch.phase == UnityEngine.TouchPhase.Moved || theTouch.phase == UnityEngine.TouchPhase.Ended) {
+         touchEndPosition = theTouch.position;
+         float x = touchEndPosition.x - touchStartPosition.x;
+         float y = touchEndPosition.y - touchStartPosition.y;
+         if (Mathf.Abs(x) == 0 && Mathf.Abs(y) == 0) {
+           direction = "t"; //ein "Tap" aufs Display
+         }
+         else if (Mathf.Abs(x) > Mathf.Abs(y)) {
+           direction = x > 0 ? "r" : "l"; //eine Bewegung nach rechts oder links
+         }
+         else {
+           direction = y > 0 ? "u" : "d"; //eine Bewegung nach oben oder unten
+         }
+       }
+    }
     if(groundCheck != null) {
       Collider2D ground = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
       if(ground != null && ground.bounds.min.y > transform.position.y) {
@@ -73,6 +102,35 @@ public class MovementAndCenter : MonoBehaviour {
     if(door != null) {
       Debug.Log("Lade nächstes Level: " + "Level"+(++level));
       SceneManager.LoadScene("Level"+level, LoadSceneMode.Single);
+    }
+
+    if(direction != "") {
+      //Der Benutzer benutzt einen Touchscreen
+      switch(direction) {
+        case "t":
+          v = new Vector2(0,0);
+          direction = "";
+          break;
+        case "u":
+          if(grounded)
+            v = new Vector2(0,jumpHeight);
+          direction = "";
+          break;
+        case "d":
+          v = new Vector2(0,0);
+          direction = "";
+          break;
+        case "l":
+          v = new Vector2(-1,0);
+          direction = "";
+          break;
+        case "r":
+          v = new Vector2(1,0);
+          direction = "";
+          break;
+        default:
+          break;
+      }
     }
     transform.Translate(v * speed);
     Camera.main.transform.position = transform.position;
