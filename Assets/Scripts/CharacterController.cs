@@ -68,10 +68,15 @@ public class CharacterController : MonoBehaviour {
       // Ignore our own collider.
       if(hit == boxCollider)
         continue;
+      if(hit.gameObject.tag == "Deadzone") {
+        Debug.Log("Der Spieler hat eine verbotene Zone betreten!");
+        //FIXME Den Spieler an dieser Stelle zum Spawn teleportieren
+        continue;
+      }
       if(hit == doorCollider) {
-        Debug.Log("TÜR");
         Debug.Log("Lade nächstes Level: " + "Level"+(++level));
         SceneManager.LoadScene("Level"+level, LoadSceneMode.Single);
+        continue;
       }
       ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
       // Ensure that we are still overlapping this collider.
