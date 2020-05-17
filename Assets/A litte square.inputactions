@@ -126,6 +126,17 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "up",
+                    "id": "22da350c-1284-4323-88d1-f990783ad900",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "1635d3fe-58b6-4ba9-a4e2-f4b964f6b5c8",
                     "path": "<XRController>/{Primary2DAxis}",

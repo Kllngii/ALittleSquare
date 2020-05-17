@@ -1,7 +1,8 @@
-using UnityEngine;
-using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class CharacterController : MonoBehaviour {
@@ -20,6 +21,13 @@ public class CharacterController : MonoBehaviour {
   [SerializeField, Tooltip("Max height the character will jump regardless of gravity")]
   float jumpHeight = 4;
 
+  [SerializeField, Tooltip("DoorObject")]
+  GameObject doorObject;
+
+  [SerializeField, Tooltip("Current Level")]
+  int level = 1;
+
+  private BoxCollider2D doorCollider;
   private BoxCollider2D boxCollider;
   private Vector2 velocity;
   private bool grounded;
@@ -27,6 +35,7 @@ public class CharacterController : MonoBehaviour {
   private float jumpInput = 0;
   private void Awake() {
     boxCollider = GetComponent<BoxCollider2D>();
+    doorCollider = doorObject.GetComponent<BoxCollider2D>();
   }
   public void OnMove(InputValue value) {
     Vector2 v = value.Get<Vector2>();
@@ -57,8 +66,13 @@ public class CharacterController : MonoBehaviour {
     Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0);
     foreach(Collider2D hit in hits) {
       // Ignore our own collider.
-      if (hit == boxCollider)
+      if(hit == boxCollider)
         continue;
+      if(hit == doorCollider) {
+        Debug.Log("TÜR");
+        Debug.Log("Lade nächstes Level: " + "Level"+(++level));
+        SceneManager.LoadScene("Level"+level, LoadSceneMode.Single);
+      }
       ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
       // Ensure that we are still overlapping this collider.
       // The overlap may no longer exist due to another intersected collider
