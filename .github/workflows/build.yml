@@ -54,10 +54,10 @@ jobs:
       - uses: josephbmanley/butler-publish-itchio-action@master
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-          CHANNEL: unity
+          CHANNEL: ${{ matrix.targetPlatform }}
           ITCH_GAME: a-little-square
           ITCH_USER: kllngii
-          PACKAGE: build/WebGL
+          PACKAGE: build
       - name: Get Time
         id: time
         uses: nanzm/get-time-action@v1.0
