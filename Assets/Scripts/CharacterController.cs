@@ -33,9 +33,13 @@ public class CharacterController : MonoBehaviour {
   private bool grounded;
   private float moveInput = 0;
   private float jumpInput = 0;
+  private Vector3 startPos;
+  private Quaternion startRot;
   private void Awake() {
     boxCollider = GetComponent<BoxCollider2D>();
     doorCollider = doorObject.GetComponent<BoxCollider2D>();
+    startPos = transform.position;
+    startRot = transform.rotation;
   }
   public void OnMove(InputValue value) {
     Vector2 v = value.Get<Vector2>();
@@ -69,9 +73,11 @@ public class CharacterController : MonoBehaviour {
       if(hit == boxCollider)
         continue;
       if(hit.gameObject.tag == "Deadzone") {
-        Debug.Log("Der Spieler hat eine verbotene Zone betreten!");
-        //FIXME Den Spieler an dieser Stelle zum Spawn teleportieren
-        continue;
+        transform.position = startPos;
+        transform.rotation = startRot;
+        velocity.x = 0;
+        velocity.y = 0;
+        break;
       }
       if(hit == doorCollider) {
         Debug.Log("Lade nächstes Level: " + "Level"+(++level));
