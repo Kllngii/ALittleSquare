@@ -79,6 +79,12 @@ public class CharacterController : MonoBehaviour {
         velocity.y = 0;
         break;
       }
+      if(hit.gameObject.tag == "Lever") {
+        Lever lever = hit.gameObject.GetComponent<Lever>();
+        Debug.Log("Lever Hit! Im CC");
+        lever.collisionWithCharacterOccurred();
+        break;
+      }
       if(hit == doorCollider) {
         Debug.Log("Lade nächstes Level: " + "Level"+(++level));
         SceneManager.LoadScene("Level"+level, LoadSceneMode.Single);
