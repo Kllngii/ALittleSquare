@@ -51,21 +51,27 @@ jobs:
         with:
           name: Build
           path: build
-      #- uses: josephbmanley/butler-publish-itchio-action@master
-        #env:
-          #BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-          #CHANNEL: unity
-          #ITCH_GAME: a-little-square
-          #ITCH_USER: kllngii
-          #PACKAGE: build/WebGL
+      - uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: unity
+          ITCH_GAME: a-little-square
+          ITCH_USER: kllngii
+          PACKAGE: build/WebGL
+      - name: Get Time
+        id: time
+        uses: nanzm/get-time-action@v1.0
+        with:
+          timeZone: 8
+          format: 'YYYY-MM-DD-HH-mm-ss'
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ steps.time.outputs.time }}${{ github.ref }}
+          release_name: Release ${{ steps.time.outputs.time }}${{ github.ref }}
           draft: false
           prerelease: false
       - name: Upload Release Asset
