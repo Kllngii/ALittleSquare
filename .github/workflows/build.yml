@@ -25,7 +25,7 @@ jobs:
           - StandaloneLinux64 # Build a Linux 64-bit standalone.
           #- iOS # Build an iOS player.
           #- Android # Build an Android .apk standalone app.
-          #- WebGL # WebGL.
+          - WebGL # WebGL.
           #- WSAPlayer # Build an Windows Store Apps player.
           #- PS4 # Build a PS4 Standalone.
           #- XboxOne # Build a Xbox One Standalone.
@@ -54,10 +54,20 @@ jobs:
           name: Build
           path: build
       - name: Push to ItchIO
+        if: ${{ matrix.targetPlatform }} != WebGL
         uses: josephbmanley/butler-publish-itchio-action@master
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
           CHANNEL: ${{ matrix.targetPlatform }}
+          ITCH_GAME: a-little-square
+          ITCH_USER: kllngii
+          PACKAGE: build
+      - name: Push to ItchIO Unity-Channel
+        if: ${{ matrix.targetPlatform }} == WebGL
+        uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: unity
           ITCH_GAME: a-little-square
           ITCH_USER: kllngii
           PACKAGE: build
