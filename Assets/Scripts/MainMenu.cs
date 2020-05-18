@@ -17,7 +17,11 @@ public class MainMenu : MonoBehaviour {
     //FIXME Settings müssen eine Verwendung kriegen
     if(isStart) {
       changeColor();
-      SceneManager.LoadScene("Level1", LoadSceneMode.Single);
+      if(!PlayerPrefs.HasKey("nextLevel")) {
+        SceneManager.LoadScene("Level1", LoadSceneMode.Single);
+        return;
+      }
+      SceneManager.LoadScene("Level" + PlayerPrefs.GetInt("nextLevel"), LoadSceneMode.Single);
     }
     if(isSettings) {
       changeColor();
