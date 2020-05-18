@@ -1,7 +1,6 @@
 name: Build project
 
 on:
-  pull_request: {}
   push: { branches: [master] }
 
 env:
