@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+//FIXME Wenn der Spieler "stribt" alle Türen wieder schließen und alles zurücksetzen.
 [RequireComponent(typeof(BoxCollider2D))]
 public class CharacterController : MonoBehaviour {
   [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
@@ -35,6 +36,7 @@ public class CharacterController : MonoBehaviour {
   private float jumpInput = 0;
   private Vector3 startPos;
   private Quaternion startRot;
+
   private void Awake() {
     boxCollider = GetComponent<BoxCollider2D>();
     doorCollider = doorObject.GetComponent<BoxCollider2D>();
@@ -83,10 +85,11 @@ public class CharacterController : MonoBehaviour {
         Lever lever = hit.gameObject.GetComponent<Lever>();
         Debug.Log("Lever Hit! Im CC");
         lever.collisionWithCharacterOccurred();
-        break;
+        continue;
       }
       if(hit == doorCollider) {
-        Debug.Log("Lade nächstes Level: " + "Level"+(++level));
+        PlayerPrefs.SetInt("nextLevel", (++level));
+        Debug.Log("Lade nächstes Level: " + "Level"+level);
         SceneManager.LoadScene("Level"+level, LoadSceneMode.Single);
         continue;
       }

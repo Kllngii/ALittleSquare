@@ -2361,7 +2361,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-11606
+  m_Name: pb_Mesh16024
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2557,7 +2557,7 @@ MonoBehaviour:
   groundDeceleration: 70
   jumpHeight: 4
   doorObject: {fileID: 1182190650}
-  level: 0
+  level: 5
 --- !u!61 &1154938484
 BoxCollider2D:
   m_ObjectHideFlags: 0
