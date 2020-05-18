@@ -1876,7 +1876,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14850
+  m_Name: pb_Mesh29036
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4050,9 +4050,10 @@ GameObject:
   - component: {fileID: 1991539609}
   - component: {fileID: 1991539608}
   - component: {fileID: 1991539607}
+  - component: {fileID: 1991539612}
   m_Layer: 0
   m_Name: Text (TMP)
-  m_TagString: Untagged
+  m_TagString: Disappear
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4243,6 +4244,23 @@ RectTransform:
   m_AnchoredPosition: {x: -2.592, y: -1.944}
   m_SizeDelta: {x: 2.7748752, y: 0.36270595}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1991539612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991539606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d638aec9160284ba69755994e46fcbe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  executeAfterAwake: 1
+  executeAfterAction: 0
+  time: 8
+  speed: 0.95
+  identifier: 0
 --- !u!43 &2090291405
 Mesh:
   m_ObjectHideFlags: 0
