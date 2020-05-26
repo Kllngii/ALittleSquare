@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 77119876}
   - component: {fileID: 77119875}
   - component: {fileID: 77119874}
+  - component: {fileID: 77119877}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -204,6 +205,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &77119877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77119873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10eeeb1d09bf5456e9ec87b2152d0e8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetAspectRatio: 1.6
 --- !u!43 &241646462
 Mesh:
   m_ObjectHideFlags: 0
@@ -827,7 +841,8 @@ MonoBehaviour:
   groundDeceleration: 70
   jumpHeight: 4
   doorObject: {fileID: 1919102932}
-  level: 6
+  level: 0
+  touchDeadzone: 100
 --- !u!61 &448472292
 BoxCollider2D:
   m_ObjectHideFlags: 0

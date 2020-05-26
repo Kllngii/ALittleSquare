@@ -29,6 +29,8 @@ public class CharacterController : MonoBehaviour {
   [SerializeField, Tooltip("Derzeitiger Level")]
   int level = 1;
 
+  [SerializeField, Tooltip("Die Totzone für die Touchsteuerung")]
+  float touchDeadzone = 2;
   private BoxCollider2D doorCollider;
   private BoxCollider2D boxCollider;
   private Vector2 velocity;
@@ -40,8 +42,6 @@ public class CharacterController : MonoBehaviour {
   private List<string> scenesInBuild = new List<string>();
   private Touch theTouch;
   private Vector2 touchStartPosition, touchEndPosition;
-  private Vector2 direction;
-  private bool newInput = false;
   private void Awake() {
     for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++) {
       string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
@@ -56,7 +56,6 @@ public class CharacterController : MonoBehaviour {
   //FIXME Irgendwann durch neue API ersetzen
   private void updateTouch() {
     if (Input.touchCount > 0) {
-      newInput = true;
       theTouch = Input.GetTouch(0);
       if (theTouch.phase == UnityEngine.TouchPhase.Began)
         touchStartPosition = theTouch.position;
@@ -64,12 +63,26 @@ public class CharacterController : MonoBehaviour {
         touchEndPosition = theTouch.position;
         float x = touchEndPosition.x - touchStartPosition.x;
         float y = touchEndPosition.y - touchStartPosition.y;
-        if (Mathf.Abs(x) == 0 && Mathf.Abs(y) == 0)
-          direction = Vector2.zero;
+        //Deadzone
+        if (Mathf.Abs(x) < touchDeadzone && Mathf.Abs(y) < touchDeadzone) {
+          moveInput = 0;
+          jumpInput = 0;
+          return;
+        }
+        //Wenn man nach schräg oben wischt, muss man springen UND laufen
+        else if(Mathf.Abs(x)/Mathf.Abs(y) > 0.95 || Mathf.Abs(x)/Mathf.Abs(y) < 1.05 ) {
+          moveInput = x > 0 ? 1f : -1f;
+          jumpInput = y > 0 ? 1f : 0f;
+        }
+
         else if (Mathf.Abs(x) > Mathf.Abs(y))
-          direction.x = x > 0 ? 1 : -1;
+          moveInput = x > 0 ? 1f : -1f;
         else
-          direction.y = y > 0 ? 1 : 0;
+          jumpInput = y > 0 ? 1f : 0f;
+      }
+      if(theTouch.phase == UnityEngine.TouchPhase.Ended) {
+        moveInput = 0;
+        jumpInput = 0;
       }
     }
   }
@@ -78,16 +91,8 @@ public class CharacterController : MonoBehaviour {
     moveInput = v.x;
     jumpInput = v.y;
   }
-  private void touchInputDirection() {
-    if(!newInput)
-      return;
-    moveInput = direction.x;
-    jumpInput = direction.y;
-    newInput = false;
-  }
   private void Update() {
     updateTouch();
-    touchInputDirection();
     if (grounded) {
       velocity.y = 0;
       if(jumpInput != 0)
