@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Advertisements;
 
 //FIXME Wenn der Spieler "stribt" alle Türen wieder schließen und alles zurücksetzen.
 [RequireComponent(typeof(BoxCollider2D))]
@@ -129,6 +130,8 @@ public class CharacterController : MonoBehaviour {
         continue;
       }
       if(hit == doorCollider) {
+        if(Random.Range(0, 10) < 2)
+          Advertisement.Show();
         PlayerPrefs.SetInt("nextLevel", (++level));
         string name = "Level"+level;
         Debug.Log("Lade nächstes Level: " + name);
