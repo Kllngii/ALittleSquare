@@ -41,8 +41,6 @@ public class CharacterController : MonoBehaviour {
   private Touch theTouch;
   private Vector2 touchStartPosition, touchEndPosition;
   private string direction;
-  private bool gaveKeyboardInput = false;
-
   private void Awake() {
     for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++) {
       string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
@@ -75,24 +73,22 @@ public class CharacterController : MonoBehaviour {
   }
   public void OnMove(InputValue value) {
     Vector2 v = value.Get<Vector2>();
-    if(!gaveKeyboardInput && (v.x != 0 || v.y != 0))
-      gaveKeyboardInput = true;
     moveInput = v.x;
     jumpInput = v.y;
   }
   private void touchInputDirection() {
     if(direction == "r")
-      moveInput = Vector2.right.x;
+      moveInput = 1f;
     if(direction == "l")
-      moveInput = Vector2.left.x;
+      moveInput = -1f;
     if(direction == "u")
-      jumpInput = Vector2.up.y;
-
+      jumpInput = 1f;
+    if(direction == "t")
+      moveInput = 0f;
   }
   private void Update() {
     updateTouch();
-    if(!gaveKeyboardInput)
-      touchInputDirection();
+    touchInputDirection();
     if (grounded) {
       velocity.y = 0;
       if(jumpInput != 0)
