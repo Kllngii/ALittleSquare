@@ -827,7 +827,7 @@ MonoBehaviour:
   groundDeceleration: 70
   jumpHeight: 4
   doorObject: {fileID: 1919102932}
-  level: 0
+  level: 6
 --- !u!61 &448472292
 BoxCollider2D:
   m_ObjectHideFlags: 0

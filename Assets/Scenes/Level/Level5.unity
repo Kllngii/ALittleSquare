@@ -4257,7 +4257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   executeAfterAwake: 1
-  executeAfterAction: 0
+  executeAfterAction: 1
   time: 8
   speed: 0.95
   identifier: 0

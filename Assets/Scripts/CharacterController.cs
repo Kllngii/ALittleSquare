@@ -3,29 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 //FIXME Wenn der Spieler "stribt" alle Türen wieder schließen und alles zurücksetzen.
 [RequireComponent(typeof(BoxCollider2D))]
 public class CharacterController : MonoBehaviour {
-  [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
+  [SerializeField, Tooltip("Maximale Geschwindigkeit in Längeneinheiten pro Sekunde")]
   float speed = 9;
 
-  [SerializeField, Tooltip("Acceleration while grounded.")]
+  [SerializeField, Tooltip("Beschleunigung bei Bodenkontakt")]
   float walkAcceleration = 75;
 
-  [SerializeField, Tooltip("Acceleration while in the air.")]
+  [SerializeField, Tooltip("Beschleunigung in der Luft")]
   float airAcceleration = 30;
 
-  [SerializeField, Tooltip("Deceleration applied when character is grounded and not attempting to move.")]
+  [SerializeField, Tooltip("Bremswirkung am Boden")]
   float groundDeceleration = 70;
 
-  [SerializeField, Tooltip("Max height the character will jump regardless of gravity")]
+  [SerializeField, Tooltip("Maximale Sprunghöhe")]
   float jumpHeight = 4;
 
-  [SerializeField, Tooltip("DoorObject")]
+  [SerializeField, Tooltip("Die den Level beendene Tür")]
   GameObject doorObject;
 
-  [SerializeField, Tooltip("Current Level")]
+  [SerializeField, Tooltip("Derzeitiger Level")]
   int level = 1;
 
   private BoxCollider2D doorCollider;
@@ -36,24 +37,54 @@ public class CharacterController : MonoBehaviour {
   private float jumpInput = 0;
   private Vector3 startPos;
   private Quaternion startRot;
+  private List<string> scenesInBuild = new List<string>();
+  private Touch theTouch;
+  private Vector2 touchStartPosition, touchEndPosition;
+  private string direction;
+  private bool gaveKeyboardInput = false;
 
   private void Awake() {
+    for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++) {
+      string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+      int lastSlash = scenePath.LastIndexOf("/");
+      scenesInBuild.Add(scenePath.Substring(lastSlash + 1, scenePath.LastIndexOf(".") - lastSlash - 1));
+    }
     boxCollider = GetComponent<BoxCollider2D>();
     doorCollider = doorObject.GetComponent<BoxCollider2D>();
     startPos = transform.position;
     startRot = transform.rotation;
   }
+  //FIXME Irgendwann durch neue API ersetzen
+  private void updateTouch() {
+    if (Input.touchCount > 0) {
+      theTouch = Input.GetTouch(0);
+      if (theTouch.phase == UnityEngine.TouchPhase.Began)
+        touchStartPosition = theTouch.position;
+      else if (theTouch.phase == TouchPhase.Moved || theTouch.phase == UnityEngine.TouchPhase.Ended) {
+        touchEndPosition = theTouch.position;
+        float x = touchEndPosition.x - touchStartPosition.x;
+        float y = touchEndPosition.y - touchStartPosition.y;
+        if (Mathf.Abs(x) == 0 && Mathf.Abs(y) == 0)
+          direction = "t";
+        else if (Mathf.Abs(x) > Mathf.Abs(y))
+          direction = x > 0 ? "r" : "l";
+        else
+          direction = y > 0 ? "u" : "d";
+      }
+    }
+  }
   public void OnMove(InputValue value) {
     Vector2 v = value.Get<Vector2>();
+    if(!gaveKeyboardInput && (v.x != 0 || v.y != 0))
+      gaveKeyboardInput = true;
     moveInput = v.x;
     jumpInput = v.y;
   }
   private void Update() {
-    // Use GetAxisRaw to ensure our input is either 0, 1 or -1.
-    //float moveInput = Input.GetAxisRaw("Horizontal");
+    updateTouch();
+
     if (grounded) {
       velocity.y = 0;
-      //if (Input.GetButtonDown("Jump")) {
       if(jumpInput != 0)
         velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
     }
@@ -89,8 +120,13 @@ public class CharacterController : MonoBehaviour {
       }
       if(hit == doorCollider) {
         PlayerPrefs.SetInt("nextLevel", (++level));
-        Debug.Log("Lade nächstes Level: " + "Level"+level);
-        SceneManager.LoadScene("Level"+level, LoadSceneMode.Single);
+        string name = "Level"+level;
+        Debug.Log("Lade nächstes Level: " + name);
+        if(scenesInBuild.Contains(name))
+          SceneManager.LoadScene(name, LoadSceneMode.Single);
+        //FIXME Später eine "Spielbeendet" Szene erstellen und hier verwenden
+        else
+          SceneManager.LoadScene("Menu", LoadSceneMode.Single);
         continue;
       }
       ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
