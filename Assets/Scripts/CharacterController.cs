@@ -40,7 +40,8 @@ public class CharacterController : MonoBehaviour {
   private List<string> scenesInBuild = new List<string>();
   private Touch theTouch;
   private Vector2 touchStartPosition, touchEndPosition;
-  private string direction;
+  private Vector2 direction;
+  private bool newInput = false;
   private void Awake() {
     for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++) {
       string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
@@ -55,6 +56,7 @@ public class CharacterController : MonoBehaviour {
   //FIXME Irgendwann durch neue API ersetzen
   private void updateTouch() {
     if (Input.touchCount > 0) {
+      newInput = true;
       theTouch = Input.GetTouch(0);
       if (theTouch.phase == UnityEngine.TouchPhase.Began)
         touchStartPosition = theTouch.position;
@@ -63,11 +65,11 @@ public class CharacterController : MonoBehaviour {
         float x = touchEndPosition.x - touchStartPosition.x;
         float y = touchEndPosition.y - touchStartPosition.y;
         if (Mathf.Abs(x) == 0 && Mathf.Abs(y) == 0)
-          direction = "t";
+          direction = Vector2.zero;
         else if (Mathf.Abs(x) > Mathf.Abs(y))
-          direction = x > 0 ? "r" : "l";
+          direction.x = x > 0 ? 1 : -1;
         else
-          direction = y > 0 ? "u" : "d";
+          direction = y > 0 ? 1 : 0;
       }
     }
   }
@@ -77,14 +79,11 @@ public class CharacterController : MonoBehaviour {
     jumpInput = v.y;
   }
   private void touchInputDirection() {
-    if(direction == "r")
-      moveInput = 1f;
-    if(direction == "l")
-      moveInput = -1f;
-    if(direction == "u")
-      jumpInput = 1f;
-    if(direction == "t")
-      moveInput = 0f;
+    if(!newInput)
+      return;
+    moveInput.x = direction.x;
+    jumpInput.y = direction.y;
+    newInput = false;
   }
   private void Update() {
     updateTouch();
