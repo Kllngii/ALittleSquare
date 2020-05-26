@@ -60,7 +60,7 @@ public class CharacterController : MonoBehaviour {
       theTouch = Input.GetTouch(0);
       if (theTouch.phase == UnityEngine.TouchPhase.Began)
         touchStartPosition = theTouch.position;
-      else if (theTouch.phase == TouchPhase.Moved || theTouch.phase == UnityEngine.TouchPhase.Ended) {
+      else if (theTouch.phase == UnityEngine.TouchPhase.Moved || theTouch.phase == UnityEngine.TouchPhase.Ended) {
         touchEndPosition = theTouch.position;
         float x = touchEndPosition.x - touchStartPosition.x;
         float y = touchEndPosition.y - touchStartPosition.y;
@@ -80,9 +80,19 @@ public class CharacterController : MonoBehaviour {
     moveInput = v.x;
     jumpInput = v.y;
   }
+  private void touchInputDirection() {
+    if(direction == "r")
+      moveInput = Vector2.right.x;
+    if(direction == "l")
+      moveInput = Vector2.left.x;
+    if(direction == "u")
+      jumpInput = Vector2.up.y;
+
+  }
   private void Update() {
     updateTouch();
-
+    if(!gaveKeyboardInput)
+      touchInputDirection();
     if (grounded) {
       velocity.y = 0;
       if(jumpInput != 0)
