@@ -39,6 +39,7 @@ public class MakeInvisibleAfterTime : MonoBehaviour {
     isCoroutineExecuting = false;
   }
   public void disappear() {
-    destroy = true;
+    if(executeAfterAction)
+      destroy = true;
   }
 }
