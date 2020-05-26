@@ -69,7 +69,7 @@ public class CharacterController : MonoBehaviour {
         else if (Mathf.Abs(x) > Mathf.Abs(y))
           direction.x = x > 0 ? 1 : -1;
         else
-          direction = y > 0 ? 1 : 0;
+          direction.y = y > 0 ? 1 : 0;
       }
     }
   }
@@ -81,8 +81,8 @@ public class CharacterController : MonoBehaviour {
   private void touchInputDirection() {
     if(!newInput)
       return;
-    moveInput.x = direction.x;
-    jumpInput.y = direction.y;
+    moveInput = direction.x;
+    jumpInput = direction.y;
     newInput = false;
   }
   private void Update() {
