@@ -32,6 +32,7 @@ public class CharacterController : MonoBehaviour {
 
   [SerializeField, Tooltip("Die Totzone für die Touchsteuerung")]
   float touchDeadzone = 2;
+
   private BoxCollider2D doorCollider;
   private BoxCollider2D boxCollider;
   private Vector2 velocity;
@@ -43,6 +44,8 @@ public class CharacterController : MonoBehaviour {
   private List<string> scenesInBuild = new List<string>();
   private Touch theTouch;
   private Vector2 touchStartPosition, touchEndPosition;
+  private bool onPlatform = false;
+
   private void Awake() {
     for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++) {
       string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
@@ -105,13 +108,14 @@ public class CharacterController : MonoBehaviour {
       velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, acceleration * Time.deltaTime);
     }
     else {
-      velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
+      if(!onPlatform)
+        velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
     }
     velocity.y += Physics2D.gravity.y * Time.deltaTime;
-    transform.Translate(velocity * Time.deltaTime);
     grounded = false;
     // Retrieve all colliders we have intersected after velocity has been applied.
     Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0);
+    onPlatform = false;
     foreach(Collider2D hit in hits) {
       // Ignore our own collider.
       if(hit == boxCollider)
@@ -130,7 +134,7 @@ public class CharacterController : MonoBehaviour {
         continue;
       }
       if(hit == doorCollider) {
-        if(Random.Range(0, 10) < 2)
+        if(Random.Range(0, 12) < 2)
           Advertisement.Show();
         PlayerPrefs.SetInt("nextLevel", (++level));
         string name = "Level"+level;
@@ -153,6 +157,7 @@ public class CharacterController : MonoBehaviour {
           grounded = true;
       }
     }
+    transform.Translate(velocity * Time.deltaTime);
     Camera.main.transform.position = transform.position;
   }
 }
