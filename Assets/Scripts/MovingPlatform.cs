@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//FIXME Wenn Start- und End-Punkt ineinander liegen, ist die Bewegung NaN und es crasht
 public class MovingPlatform : MonoBehaviour {
   [SerializeField, Tooltip("Ein Empty-Gameobject als Startpunkt der Bewegung")]
   GameObject startEmpty;
@@ -34,7 +34,7 @@ public class MovingPlatform : MonoBehaviour {
     if(transform.position.x-startVector.x < 0 || transform.position.y-startVector.y < 0)
       reversed = false;
     if(reversed)
-      difference = startVector - endVector;
+      difference = (startVector - endVector) / Vector3.Distance(endVector, startVector);
     dir = difference * Time.deltaTime * speed;
     transform.Translate(dir);
   }
