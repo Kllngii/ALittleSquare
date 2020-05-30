@@ -1,0 +1,15 @@
+name: Inform people
+on:
+  release:
+    types: [created]
+jobs:
+  inform:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Discord notification
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      uses: Ilshidur/action-discord@master
+      with:
+        args: 'A little square did just receive a patch! Check it out: https://kllngii.itch.io/a-little-square'
