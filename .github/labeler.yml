@@ -1,0 +1,7 @@
+assets:
+  - Assets/**/*
+
+logs:
+  - Logs/*
+settings:
+  - ProjectSettings/**/*
