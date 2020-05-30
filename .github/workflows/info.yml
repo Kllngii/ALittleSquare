@@ -1,4 +1,4 @@
-name: Inform people
+name: release message
 on:
   release:
     types: [created]
