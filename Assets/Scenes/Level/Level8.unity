@@ -831,7 +831,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3944
+  m_Name: pb_Mesh28268
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1094,6 +1094,7 @@ GameObject:
   - component: {fileID: 608538795}
   - component: {fileID: 608538794}
   - component: {fileID: 608538793}
+  - component: {fileID: 608538799}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Disappear
@@ -1307,6 +1308,19 @@ RectTransform:
   m_AnchoredPosition: {x: -1.96, y: -5.66}
   m_SizeDelta: {x: 3.7967143, y: 1.1095831}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &608538799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608538792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78419dd2a39b447f785de73596ef18f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TextId: level8_1
 --- !u!1 &616705314
 GameObject:
   m_ObjectHideFlags: 0
@@ -2262,7 +2276,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c22777d6e868e4f2fb421913386b154e, type: 2}
+  - {fileID: 2100000, guid: 133ebcc3a7e934838875b41fb39b91de, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

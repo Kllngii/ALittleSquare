@@ -1,0 +1,9 @@
+name=A little square
+settings=Einstellungen
+start=Start
+quit=Verlassen
+
+level1_1=Das ist ein Portal, es bringt dich ins nächste Level
+level5_1=Das ist ein Schalter
+level7_1=Uii eine Plattform, sie bewegt sich!
+level8_1=Eine Plattform kann sich auch vertikal bewegen

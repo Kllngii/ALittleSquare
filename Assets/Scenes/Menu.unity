@@ -291,6 +291,7 @@ GameObject:
   - component: {fileID: 472833433}
   - component: {fileID: 472833434}
   - component: {fileID: 472833435}
+  - component: {fileID: 472833436}
   m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
@@ -314,8 +315,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.572, y: -1.2}
-  m_SizeDelta: {x: 5.537753, y: 1.5107327}
+  m_AnchoredPosition: {x: -3.349, y: -1.2}
+  m_SizeDelta: {x: 7.983487, y: 1.5107327}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &472833429
 MonoBehaviour:
@@ -542,6 +543,19 @@ MonoBehaviour:
   isSettings: 1
   isQuit: 0
   clickColor: {r: 0, g: 1, b: 1, a: 1}
+--- !u!114 &472833436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472833427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78419dd2a39b447f785de73596ef18f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TextId: settings
 --- !u!1 &484830690
 GameObject:
   m_ObjectHideFlags: 0
@@ -1538,6 +1552,7 @@ GameObject:
   - component: {fileID: 1945467343}
   - component: {fileID: 1945467344}
   - component: {fileID: 1945467345}
+  - component: {fileID: 1945467346}
   m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
@@ -1561,8 +1576,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5.808, y: 0}
-  m_SizeDelta: {x: 3.065197, y: 1.4657779}
+  m_AnchoredPosition: {x: -4.12, y: 0}
+  m_SizeDelta: {x: 6.4403095, y: 1.4657779}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1945467339
 MonoBehaviour:
@@ -1789,6 +1804,19 @@ MonoBehaviour:
   isSettings: 0
   isQuit: 0
   clickColor: {r: 0, g: 1, b: 1, a: 1}
+--- !u!114 &1945467346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945467337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78419dd2a39b447f785de73596ef18f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TextId: start
 --- !u!1 &1971486353
 GameObject:
   m_ObjectHideFlags: 0
@@ -1805,6 +1833,7 @@ GameObject:
   - component: {fileID: 1971486359}
   - component: {fileID: 1971486360}
   - component: {fileID: 1971486361}
+  - component: {fileID: 1971486362}
   m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
@@ -1828,8 +1857,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5.808, y: -2.4}
-  m_SizeDelta: {x: 3.065197, y: 1.4657779}
+  m_AnchoredPosition: {x: -3.754, y: -2.4}
+  m_SizeDelta: {x: 7.1740303, y: 1.4657779}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1971486355
 MonoBehaviour:
@@ -2056,3 +2085,16 @@ MonoBehaviour:
   isSettings: 0
   isQuit: 1
   clickColor: {r: 0, g: 1, b: 1, a: 1}
+--- !u!114 &1971486362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971486353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78419dd2a39b447f785de73596ef18f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TextId: quit

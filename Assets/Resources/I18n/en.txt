@@ -1,0 +1,9 @@
+name=A little square
+settings=Settings
+start=Start
+quit=Quit
+
+level1_1=That's a portal, it will teleport you to the next level
+level5_1=This is a lever
+level7_1=Look! A moving platform
+level8_1=Platforms can also move up and down
