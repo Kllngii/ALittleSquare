@@ -544,7 +544,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27028
+  m_Name: pb_Mesh27518
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2359,6 +2359,7 @@ GameObject:
   - component: {fileID: 927422470}
   - component: {fileID: 927422469}
   - component: {fileID: 927422468}
+  - component: {fileID: 927422474}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Disappear
@@ -2402,7 +2403,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Uii eine Plattform, sie bewegt sicht!
+  m_text: Uii eine Plattform, sie bewegt sich!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9b595d964d3b943979df547a928b064d, type: 2}
   m_sharedMaterial: {fileID: 5773102589444383648, guid: 9b595d964d3b943979df547a928b064d,
@@ -2472,7 +2473,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 927422469}
-    characterCount: 37
+    characterCount: 36
     spriteCount: 0
     spaceCount: 5
     wordCount: 6
@@ -2570,6 +2571,19 @@ RectTransform:
   m_AnchoredPosition: {x: -8.17, y: -5.32}
   m_SizeDelta: {x: 2.7748752, y: 0.343202}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &927422474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927422467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78419dd2a39b447f785de73596ef18f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TextId: level7_1
 --- !u!43 &1050458954
 Mesh:
   m_ObjectHideFlags: 0
@@ -5033,7 +5047,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c22777d6e868e4f2fb421913386b154e, type: 2}
+  - {fileID: 2100000, guid: 133ebcc3a7e934838875b41fb39b91de, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
