@@ -7,10 +7,10 @@
 A small 2d game using the unity game-engine. All the commit messages on this site will be german, because I am german myself.
 
 <br>
-<a href="https://discord.com/invite/QRAjGpq">
+<a href="https://discord.com/invite/QRAjGpq" target="_blank">
   <img src="/mdImages/Discord.svg" width="200"/>
 </a>
 <br>
-<a href="https://kllngii.itch.io/a-little-square">
+<a href="https://kllngii.itch.io/a-little-square" target="_blank">
   <img src="/mdImages/itchiobadge.svg" width="200"/>
 </a>
