@@ -1,7 +1,5 @@
 name: release message
-on:
-  release:
-    types: [created]
+on: push
 jobs:
   inform:
     runs-on: ubuntu-latest
