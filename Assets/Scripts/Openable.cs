@@ -16,4 +16,7 @@ public class Openable : MonoBehaviour {
     Debug.Log("Lever Hit! Im Openable-Script");
     transform.localScale = new Vector3(0,0,0);
   }
+  public void close() {
+    transform.localScale = new Vector3(1,1,1);
+  }
 }

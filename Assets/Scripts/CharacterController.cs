@@ -45,7 +45,8 @@ public class CharacterController : MonoBehaviour {
   private Touch theTouch;
   private Vector2 touchStartPosition, touchEndPosition;
   private bool onPlatform = false;
-
+  private BoxMover lastBox = null;
+  private Lever lastLever = null;
   private void Awake() {
     for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++) {
       string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
@@ -56,6 +57,20 @@ public class CharacterController : MonoBehaviour {
     doorCollider = doorObject.GetComponent<BoxCollider2D>();
     startPos = transform.position;
     startRot = transform.rotation;
+
+    Text levelTag = GameObject.FindGameObjectsWithTag("LevelTag")[0].GetComponent<Text>();
+    //FIXME funktioniert irgendwie nicht korrekt
+    //if(levelTag != null)
+      //levelTag.text = "Level " + level;
+    if(levelTag != null)
+      levelTag.text = "";
+    //FIXME Später nutzen
+    ImageChanger saveTag = GameObject.FindGameObjectsWithTag("SaveTag")[0].GetComponent<ImageChanger>();
+    ImageChanger pauseTag = GameObject.FindGameObjectsWithTag("PauseTag")[0].GetComponent<ImageChanger>();
+    if(saveTag != null && pauseTag != null) {
+      saveTag.active = false;
+      pauseTag.active = false;
+    }
   }
   //FIXME Irgendwann durch neue API ersetzen
   private void updateTouch() {
@@ -95,6 +110,9 @@ public class CharacterController : MonoBehaviour {
     moveInput = v.x;
     jumpInput = v.y;
   }
+  public void OnSubmit(InputValue value) {
+    Debug.Log("Taste gedrückt!");
+  }
   private void Update() {
     updateTouch();
     if (grounded) {
@@ -116,6 +134,8 @@ public class CharacterController : MonoBehaviour {
     // Retrieve all colliders we have intersected after velocity has been applied.
     Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0);
     onPlatform = false;
+    bool noBox = true;
+    bool noLever = true;
     foreach(Collider2D hit in hits) {
       // Ignore our own collider.
       if(hit == boxCollider)
@@ -129,7 +149,6 @@ public class CharacterController : MonoBehaviour {
       }
       if(hit.gameObject.tag == "Lever") {
         Lever lever = hit.gameObject.GetComponent<Lever>();
-        Debug.Log("Lever Hit! Im CC");
         lever.collisionWithCharacterOccurred();
         continue;
       }
@@ -146,6 +165,12 @@ public class CharacterController : MonoBehaviour {
           SceneManager.LoadScene("Menu", LoadSceneMode.Single);
         continue;
       }
+      if(hit.gameObject.tag == "Box") {
+        BoxMover box = hit.gameObject.GetComponent<BoxMover>();
+        noBox = false;
+        if(Mathf.Abs(box.gameObject.transform.position.y - gameObject.transform.position.y) < 0.9f)
+          box.overrideVelocityWithPlayerVelocity(velocity.x);
+      }
       ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
       // Ensure that we are still overlapping this collider.
       // The overlap may no longer exist due to another intersected collider
@@ -156,6 +181,14 @@ public class CharacterController : MonoBehaviour {
         if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0)
           grounded = true;
       }
+    }
+    if(noBox && lastBox != null) {
+      lastBox.overrideVelocityWithPlayerVelocity(0f);
+      lastBox = null;
+    }
+    if(noLever && lastLever != null) {
+      lastLever.unpressLever();
+      lastLever = null;
     }
     transform.Translate(velocity * Time.deltaTime);
     Camera.main.transform.position = transform.position;

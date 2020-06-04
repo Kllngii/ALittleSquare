@@ -12,6 +12,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Submit",
+                    "type": "Button",
+                    "id": "99a82615-412a-4790-a662-8e1eadfceda1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -20,7 +28,7 @@
                     "id": "978bfe49-cc26-4a3d-ab7b-7d7a29327403",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "StickDeadzone(min=0.125,max=0.925),NormalizeVector2",
                     "groups": ";Gamepad",
                     "action": "Move",
                     "isComposite": false,
@@ -141,7 +149,7 @@
                     "id": "1635d3fe-58b6-4ba9-a4e2-f4b964f6b5c8",
                     "path": "<XRController>/{Primary2DAxis}",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "StickDeadzone(min=0.125,max=0.925),NormalizeVector2",
                     "groups": "XR",
                     "action": "Move",
                     "isComposite": false,
@@ -152,9 +160,53 @@
                     "id": "3ea4d645-4504-4529-b061-ab81934c3752",
                     "path": "<Joystick>/stick",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "StickDeadzone(min=0.125,max=0.925),NormalizeVector2",
                     "groups": "Joystick",
                     "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8fe98866-b0cf-423c-88a4-d79fd3995328",
+                    "path": "<Gamepad>/dpad",
+                    "interactions": "",
+                    "processors": "NormalizeVector2",
+                    "groups": "Gamepad",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d7cf4316-22b7-4463-844c-c094577ffcd5",
+                    "path": "<Touchscreen>/Movement",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touch",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3a905ea8-715b-48b1-98e9-6cd1b4658010",
+                    "path": "<Keyboard>/E",
+                    "interactions": "Tap(duration=0.2,pressPoint=0.5)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c674045d-4712-4fec-9fb5-802b6c2f2a53",
+                    "path": "*/{Submit}",
+                    "interactions": "Tap(duration=0.2,pressPoint=0.5)",
+                    "processors": "",
+                    "groups": "Gamepad;Keyboard&Mouse;Joystick;XR",
+                    "action": "Submit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

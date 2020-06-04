@@ -9,6 +9,10 @@ TagManager:
   - Lever
   - Disappear
   - Platform
+  - Box
+  - LevelTag
+  - SaveTag
+  - PauseTag
   layers:
   - Default
   - TransparentFX
