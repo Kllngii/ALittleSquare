@@ -12,6 +12,16 @@ public class Lever : MonoBehaviour {
     openables = GameObject.FindGameObjectsWithTag("Openable");
     invisibles = GameObject.FindGameObjectsWithTag("Disappear");
   }
+  public void unpressLever() {
+    transform.localScale = new Vector3(1f, 0.25f, 1f);
+    foreach(GameObject openable in openables) {
+      Openable script = openable.GetComponent<Openable>();
+      if(script.identifier == identifier) {
+        script.close();
+        break;
+      }
+    }
+  }
   public void collisionWithCharacterOccurred() {
     transform.localScale = new Vector3(1f, 0.125f, 1f);
     Debug.Log("Lever Hit! Im Lever-Script");
