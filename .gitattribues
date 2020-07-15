@@ -1,0 +1,4 @@
+*.scene linguist-language=Unity3D
+*.shader linguist-language=Unity3D
+*.cginc linguist-language=Unity3D
+*.c# linguist-language=Unity3D
