@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
+using System;
 
 //FIXME Wenn der Spieler "stribt" alle Türen wieder schließen und alles zurücksetzen.
 [RequireComponent(typeof(BoxCollider2D))]
@@ -27,8 +28,8 @@ public class CharacterController : MonoBehaviour {
   [SerializeField, Tooltip("Die den Level beendene Tür")]
   GameObject doorObject;
 
-  [SerializeField, Tooltip("Derzeitiger Level")]
-  int level = 1;
+  [SerializeField, Tooltip("Level, nach welchem man ins Hauptmenü kommt")]
+  int maxLevel = 1;
 
   [SerializeField, Tooltip("Die Totzone für die Touchsteuerung")]
   float touchDeadzone = 2;
@@ -47,7 +48,9 @@ public class CharacterController : MonoBehaviour {
   private bool onPlatform = false;
   private BoxMover lastBox = null;
   private Lever lastLever = null;
+  private int level = 1;
   private void Awake() {
+    level = Int32.Parse(SceneManager.GetActiveScene().name.Replace("Level", ""));
     for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++) {
       string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
       int lastSlash = scenePath.LastIndexOf("/");
@@ -57,7 +60,7 @@ public class CharacterController : MonoBehaviour {
     doorCollider = doorObject.GetComponent<BoxCollider2D>();
     startPos = transform.position;
     startRot = transform.rotation;
-
+    /*
     Text levelTag = GameObject.FindGameObjectsWithTag("LevelTag")[0].GetComponent<Text>();
     //FIXME funktioniert irgendwie nicht korrekt
     //if(levelTag != null)
@@ -70,7 +73,7 @@ public class CharacterController : MonoBehaviour {
     if(saveTag != null && pauseTag != null) {
       saveTag.active = false;
       pauseTag.active = false;
-    }
+    }*/
   }
   //FIXME Irgendwann durch neue API ersetzen
   private void updateTouch() {
@@ -153,12 +156,12 @@ public class CharacterController : MonoBehaviour {
         continue;
       }
       if(hit == doorCollider) {
-        if(Random.Range(0, 12) < 2)
+        if(UnityEngine.Random.Range(0, 12) < 2)
           Advertisement.Show();
         PlayerPrefs.SetInt("nextLevel", (++level));
         string name = "Level"+level;
         Debug.Log("Lade nächstes Level: " + name);
-        if(scenesInBuild.Contains(name))
+        if(scenesInBuild.Contains(name) && level <= maxLevel)
           SceneManager.LoadScene(name, LoadSceneMode.Single);
         //FIXME Später eine "Spielbeendet" Szene erstellen und hier verwenden
         else
