@@ -5,7 +5,7 @@ Thanks for considering to contriute to A little square :tada:
 The following is a set of guidelines for contributing to A little square
 
 [How To Contribute?](#how-to-contribute)
-  * [Suggesting Enhancements](#enhancements)
+  * [Suggesting Enhancements](#suggesting-enhancements)
   * [Reporting Bugs](#reporting-bugs)
     
 ## How To Contribute?
