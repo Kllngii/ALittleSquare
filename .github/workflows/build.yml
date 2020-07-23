@@ -19,7 +19,7 @@ jobs:
         #projectPath:
           #- path/to/your/project
         unityVersion:
-          - 2019.3.14f1
+          - 2020.1.0a21
         targetPlatform:
           - StandaloneOSX # Build a macOS standalone (Intel 64-bit).
           - StandaloneWindows # Build a Windows standalone.
@@ -39,7 +39,7 @@ jobs:
           lfs: true
       - uses: actions/cache@v1.1.0
         with:
-          path: ${{ matrix.projectPath }}/Library
+          path: /Library
           key: Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}
           restore-keys: |
             Library-${{ matrix.projectPath }}-
